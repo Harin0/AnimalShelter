@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head th:include="layout :: head">
+</head>
+<body>
+<div th:include="layout :: navigationPanel"></div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-8">
+            <h2>Cats</h2>
+            <table>
+                <tr style="font-weight: bold">
+                    <td>Name</td>
+                    <td>Gender</td>
+                    <td>Age</td>
+                    <td>Description</td>
+                    <td>Color</td>
+                </tr>
+                <tr th:each="cat: ${cats}">
+                    <td th:text="${cat.name}"/>
+                    <td th:text="${cat.gender}"/>
+                    <td th:text="${cat.age}"/>
+                    <td th:text="${cat.description}"/>
+                    <td th:text="${cat.color}"/>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
