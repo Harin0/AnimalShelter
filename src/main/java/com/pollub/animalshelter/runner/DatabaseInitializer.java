@@ -37,16 +37,20 @@ public class DatabaseInitializer implements CommandLineRunner {
                 arrivalDate,
                 "Black",
                 null,
-                null);
+                null
+        );
+
         Animal dog = animalFactory.createAnimal(
                 "dog",
                 "Alex",
                 "Male",
                 "3",
-                "Friendly", arrivalDate,
+                "Friendly",
+                arrivalDate,
                 null,
                 "Labrador",
-                "Large");
+                "Large"
+        );
 
         Animal clonedDog = animalFactory.cloneAnimal(dog);
         Animal clonedCat = animalFactory.cloneAnimal(cat);
