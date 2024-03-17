@@ -1,7 +1,7 @@
-package com.pollub.animalshelter.factory;
+package com.pollub.animalshelter.designpattern.factory;
 
-import com.pollub.animalshelter.builder.CatBuilder;
-import com.pollub.animalshelter.builder.DogBuilder;
+import com.pollub.animalshelter.designpattern.builder.CatBuilder;
+import com.pollub.animalshelter.designpattern.builder.DogBuilder;
 import com.pollub.animalshelter.entity.Animal;
 import com.pollub.animalshelter.exception.CloningException;
 import org.springframework.stereotype.Component;
@@ -36,7 +36,8 @@ public class AnimalFactory {
                                Date arrivalDate,
                                String color,
                                String breed,
-                               String size) {
+                               String size,
+                               double heightInMeters) {
         return switch (type.toLowerCase()) {
             case "cat" -> new CatBuilder()
                     .name(name)
@@ -45,6 +46,7 @@ public class AnimalFactory {
                     .description(description)
                     .arrivalDate(arrivalDate)
                     .color(color)
+                    .heightInMeters(heightInMeters)
                     .build();
             case "dog" -> new DogBuilder()
                     .name(name)
@@ -54,6 +56,7 @@ public class AnimalFactory {
                     .arrivalDate(arrivalDate)
                     .breed(breed)
                     .size(size)
+                    .heightInMeters(heightInMeters)
                     .build();
             default -> throw new IllegalArgumentException("Invalid animal type: " + type);
         };

@@ -1,4 +1,4 @@
-package com.pollub.animalshelter.builder;
+package com.pollub.animalshelter.designpattern.builder;
 
 import com.pollub.animalshelter.entity.Dog;
 
@@ -27,6 +27,7 @@ public class DogBuilder extends AnimalBuilder<DogBuilder> {
         dog.setArrivalDate(arrivalDate);
         dog.setBreed(breed);
         dog.setSize(size);
+        dog.setHeightInMeters(heightInMeters);
         return dog;
     }
 }

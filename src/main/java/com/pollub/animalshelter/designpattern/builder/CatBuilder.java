@@ -1,4 +1,4 @@
-package com.pollub.animalshelter.builder;
+package com.pollub.animalshelter.designpattern.builder;
 
 import com.pollub.animalshelter.entity.Cat;
 
@@ -20,6 +20,7 @@ public class CatBuilder extends AnimalBuilder<CatBuilder> {
         cat.setDescription(description);
         cat.setArrivalDate(arrivalDate);
         cat.setColor(color);
+        cat.setHeightInMeters(heightInMeters);
         return cat;
     }
 }

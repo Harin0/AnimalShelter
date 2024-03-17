@@ -12,4 +12,9 @@ public class Dog extends Animal {
 
     private String breed;
     private String size;
+
+    @Override
+    public void feed() {
+        performFeed();
+    }
 }

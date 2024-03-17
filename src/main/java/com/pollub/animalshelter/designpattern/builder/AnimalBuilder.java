@@ -1,4 +1,4 @@
-package com.pollub.animalshelter.builder;
+package com.pollub.animalshelter.designpattern.builder;
 
 import com.pollub.animalshelter.entity.Animal;
 
@@ -11,6 +11,8 @@ public abstract class AnimalBuilder<T extends AnimalBuilder<T>> {
     protected String age;
     protected String description;
     protected Date arrivalDate;
+
+    protected double heightInMeters;
 
     public T name(String name) {
         this.name = name;
@@ -34,6 +36,11 @@ public abstract class AnimalBuilder<T extends AnimalBuilder<T>> {
 
     public T arrivalDate(Date arrivalDate) {
         this.arrivalDate = arrivalDate;
+        return (T) this;
+    }
+
+    public T heightInMeters(double heightInMeters) {
+        this.heightInMeters = heightInMeters;
         return (T) this;
     }
 

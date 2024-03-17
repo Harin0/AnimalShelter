@@ -1,9 +1,10 @@
 package com.pollub.animalshelter.entity;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.MappedSuperclass;
+import com.pollub.animalshelter.designpattern.bridge.FeedDryFood;
+import com.pollub.animalshelter.designpattern.bridge.FeedMeat;
+import com.pollub.animalshelter.designpattern.bridge.FeedWetFood;
+import com.pollub.animalshelter.designpattern.composite.AnimalComponent;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Date;
@@ -13,7 +14,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @MappedSuperclass
-public abstract class Animal implements Cloneable {
+public abstract class Animal implements Cloneable, AnimalComponent {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,6 +24,25 @@ public abstract class Animal implements Cloneable {
     private String age;
     private String description;
     private Date arrivalDate;
+    private double heightInMeters;
+    private String feedBehavior;
+
+    public void performFeed() {
+        if (feedBehavior != null) {
+            if (feedBehavior.equals("FeedDryFood")) {
+                new FeedDryFood().feed();
+            } else if (feedBehavior.equals("FeedWetFood")) {
+                new FeedWetFood().feed();
+            } else if (feedBehavior.equals("FeedMeat")) {
+                new FeedMeat().feed();
+            } else {
+                throw new IllegalArgumentException("Invalid feed behavior type");
+            }
+        }else {
+            System.out.println("No feeding behavior type specified.");
+        }
+
+    }
 
     @Override
     public Object clone() throws CloneNotSupportedException {

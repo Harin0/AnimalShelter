@@ -1,6 +1,11 @@
 package com.pollub.animalshelter.runner;
 
-import com.pollub.animalshelter.factory.AnimalFactory;
+import com.pollub.animalshelter.designpattern.adapter.HeightAdapter;
+import com.pollub.animalshelter.designpattern.adapter.MetersToCentimetersAdapter;
+import com.pollub.animalshelter.designpattern.composite.AnimalGroup;
+import com.pollub.animalshelter.designpattern.decorator.AdoptedAnimal;
+import com.pollub.animalshelter.designpattern.decorator.VaccinatedAnimal;
+import com.pollub.animalshelter.designpattern.factory.AnimalFactory;
 import com.pollub.animalshelter.entity.Animal;
 import com.pollub.animalshelter.entity.Cat;
 import com.pollub.animalshelter.entity.Dog;
@@ -20,6 +25,7 @@ public class DatabaseInitializer implements CommandLineRunner {
 
     private final CatRepository catRepository;
     private final DogRepository dogRepository;
+    private final HeightAdapter heightAdapter = new MetersToCentimetersAdapter();
 
     AnimalFactory animalFactory = AnimalFactory.getInstance();
 
@@ -37,7 +43,8 @@ public class DatabaseInitializer implements CommandLineRunner {
                 arrivalDate,
                 "Black",
                 null,
-                null
+                null,
+                0.3
         );
 
         Animal dog = animalFactory.createAnimal(
@@ -49,11 +56,32 @@ public class DatabaseInitializer implements CommandLineRunner {
                 arrivalDate,
                 null,
                 "Labrador",
-                "Large"
+                "Large",
+                0.7
         );
 
         Animal clonedDog = animalFactory.cloneAnimal(dog);
         Animal clonedCat = animalFactory.cloneAnimal(cat);
+
+        cat.setFeedBehavior("FeedWetFood");
+        dog.setFeedBehavior("FeedDryFood");
+
+        AnimalGroup groupOfCats = new AnimalGroup();
+        AnimalGroup groupOfCatsAndDogs = new AnimalGroup();
+        AnimalGroup animalGroup = new AnimalGroup();
+
+        groupOfCats.add(cat);
+        groupOfCats.add(cat);
+        groupOfCatsAndDogs.add(cat);
+        groupOfCatsAndDogs.add(dog);
+
+        animalGroup.add(dog);
+        animalGroup.remove(dog);
+        animalGroup.add(dog);
+        animalGroup.add(groupOfCats);
+        animalGroup.add(groupOfCatsAndDogs);
+
+        animalGroup.feed();
 
         catRepository.save((Cat) cat);
         dogRepository.save((Dog) dog);
@@ -61,6 +89,14 @@ public class DatabaseInitializer implements CommandLineRunner {
         catRepository.save((Cat) clonedCat);
         dogRepository.save((Dog) clonedDog);
 
+        cat.setHeightInMeters(heightAdapter.convert(cat.getHeightInMeters()));
+
+
+        Animal vaccinatedCat = new VaccinatedAnimal(new AdoptedAnimal(cat));
+        Animal adoptedDog = new AdoptedAnimal(dog);
+
+        log.info(vaccinatedCat.getDescription());
+        log.info(adoptedDog.getDescription());
         log.info("Database initialized");
     }
 }

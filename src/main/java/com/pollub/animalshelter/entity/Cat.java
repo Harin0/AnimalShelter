@@ -10,4 +10,10 @@ import lombok.*;
 @Entity
 public class Cat extends Animal {
     private String color;
+
+
+    @Override
+    public void feed() {
+        performFeed();
+    }
 }
