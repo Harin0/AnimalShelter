@@ -21,6 +21,7 @@ public class CatBuilder extends AnimalBuilder<CatBuilder> {
         cat.setArrivalDate(arrivalDate);
         cat.setColor(color);
         cat.setHeightInMeters(heightInMeters);
+        cat.setIsAggressive(isAggressive);
         return cat;
     }
 }

@@ -28,6 +28,7 @@ public class DogBuilder extends AnimalBuilder<DogBuilder> {
         dog.setBreed(breed);
         dog.setSize(size);
         dog.setHeightInMeters(heightInMeters);
+        dog.setIsAggressive(isAggressive);
         return dog;
     }
 }

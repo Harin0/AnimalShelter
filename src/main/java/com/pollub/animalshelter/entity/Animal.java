@@ -26,6 +26,7 @@ public abstract class Animal implements Cloneable, AnimalComponent {
     private Date arrivalDate;
     private double heightInMeters;
     private String feedBehavior;
+    private Boolean isAggressive = false;
 
     public void performFeed() {
         if (feedBehavior != null) {

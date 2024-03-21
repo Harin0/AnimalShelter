@@ -37,7 +37,8 @@ public class AnimalFactory {
                                String color,
                                String breed,
                                String size,
-                               double heightInMeters) {
+                               double heightInMeters,
+                               boolean isAggressive) {
         return switch (type.toLowerCase()) {
             case "cat" -> new CatBuilder()
                     .name(name)
@@ -47,6 +48,7 @@ public class AnimalFactory {
                     .arrivalDate(arrivalDate)
                     .color(color)
                     .heightInMeters(heightInMeters)
+                    .isAggressive(isAggressive)
                     .build();
             case "dog" -> new DogBuilder()
                     .name(name)
@@ -57,6 +59,7 @@ public class AnimalFactory {
                     .breed(breed)
                     .size(size)
                     .heightInMeters(heightInMeters)
+                    .isAggressive(isAggressive)
                     .build();
             default -> throw new IllegalArgumentException("Invalid animal type: " + type);
         };

@@ -14,6 +14,8 @@ public abstract class AnimalBuilder<T extends AnimalBuilder<T>> {
 
     protected double heightInMeters;
 
+    protected boolean isAggressive;
+
     public T name(String name) {
         this.name = name;
         return (T) this;
@@ -41,6 +43,11 @@ public abstract class AnimalBuilder<T extends AnimalBuilder<T>> {
 
     public T heightInMeters(double heightInMeters) {
         this.heightInMeters = heightInMeters;
+        return (T) this;
+    }
+
+    public T isAggressive(boolean isAggressive) {
+        this.isAggressive = isAggressive;
         return (T) this;
     }
 
